@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Your Billionth Second!
+  body
+    p There's only power of ten that's feasible to celebrate. When you're a hundred million seconds old, you're a little under four years old; when you're ten billion seconds old, you're over three hundred.
+    p Handily, one billion seconds is just shy of 32 years; at 31.7.
+    p When is YOUR billion second?
+    .input
+      label Birdate & time:
+      input type="datetime-local" onchange="window.calc(this)"
+    .output
+      p
+        | Your billionth second will occur on:
+        #billion a date as yet uknown to all
+      p
+        | If you missed that, your 1,111,111,111 second will occur on:
+        #ones a date as yet uknown to all
+      p
+        | If you missed <i>that</i>, your 1,234,567,890 second will occur on:
+        #digits a date as yet uknown to all
+      i Note: We're assuming you're celebrating in the same timezone that you were born in. Your exact time if that's not the case is an exercise left up to the reader
+
+coffee:
+  window.calc = (input) ->
+    birth_timestamp = Date.parse(input.value)
+
+    billion = new Date(birth_timestamp + 1000000000000)
+    document.getElementById("billion").innerText =
+      billion.toGMTString().substring(0, billion.toGMTString().length - 4)
+
+    ones    = new Date(birth_timestamp + 1111111111000)
+    document.getElementById("ones").innerText =
+      ones.toGMTString().substring(0, ones.toGMTString().length - 4)
+
+    digits  = new Date(birth_timestamp + 1234567890000)
+    document.getElementById("digits").innerText =
+      digits.toGMTString().substring(0, digits.toGMTString().length - 4)
